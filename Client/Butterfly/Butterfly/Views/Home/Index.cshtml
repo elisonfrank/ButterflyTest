@@ -1,0 +1,50 @@
+﻿@model Calculator.Models.CalculatorModel;
+@{
+    ViewData["Title"] = "Calculator";
+}
+
+@using (Html.BeginForm("Calculate", "Home", FormMethod.Post))
+{
+    <div class="text-center">
+        <table>
+            <thead>
+                <tr>
+                    <td colspan="4">@Html.TextBoxFor(m => m.History, htmlAttributes: new { @readonly="readonly" })</td>
+                </tr>
+                <tr>
+                    <td colspan="4">@Html.TextBoxFor(m => m.Display, htmlAttributes: new { @readonly="readonly" })</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3">@Html.ActionLink("Clear", "Clear")</td>
+                    <td>@Html.ActionLink("/", "Division")</td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("7", "Digit", new { number = 7 })</td>
+                    <td>@Html.ActionLink("8", "Digit", new { number = 8 })</td>
+                    <td>@Html.ActionLink("9", "Digit", new { number = 9 })</td>
+                    <td>@Html.ActionLink("-", "Subtraction")</td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("4", "Digit", new { number = 4 })</td>
+                    <td>@Html.ActionLink("5", "Digit", new { number = 5 })</td>
+                    <td>@Html.ActionLink("6", "Digit", new { number = 6 })</td>
+                    <td>@Html.ActionLink("+", "Addition")</td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("1", "Digit", new { number = 1 })</td>
+                    <td>@Html.ActionLink("2", "Digit", new { number = 2 })</td>
+                    <td>@Html.ActionLink("3", "Digit", new { number = 3 })</td>
+                    <td>@Html.ActionLink("*", "Multiplication")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ActionLink("0", "Digit", new { number = 0 })</td>
+                    <td></td>
+                    <td><input id="Submit" type="submit" value="=" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
