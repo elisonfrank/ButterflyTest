@@ -16,3 +16,68 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#tb-calculator thead input {
+    font-size: x-large;
+}
+
+#tb-calculator thead input:focus-visible {
+    outline:none;
+}
+
+#tb-calculator thead tr {
+    background-color: lightgrey;
+    border-radius: 2px;
+}
+
+#tb-calculator tbody {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#tb-calculator tbody tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+#tb-calculator tbody td a {
+    text-decoration: none;
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 64px;
+    height: 25px;
+    display: block;
+    background-color: whitesmoke;
+    font-size: 14px;
+    color: black;
+}
+
+#History {
+    border: none;
+    background-color: transparent;
+    font-size: small !important;
+    display: block;
+    width: 100%;
+}
+
+#Submit {
+    width: 64px;
+    height: 30px;
+}
+
+#Submit:focus-visible{
+    outline:none;
+}
+
+#clear, #zero {
+    width: 209px !important;
+}
+
+#clear, #addition, #subtraction, #division, #multiplication, #Submit {
+    background-color: lightblue !important;
+}
+
+#zero {
+    height: 30px !important;
+}

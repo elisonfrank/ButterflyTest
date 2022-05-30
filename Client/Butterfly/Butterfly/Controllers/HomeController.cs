@@ -1,5 +1,6 @@
 ﻿using Butterfly.Models;
 using Calculator.Enums;
+using Calculator.Helpers;
 using Calculator.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,10 +10,12 @@ namespace Butterfly.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CalculatorClient _client;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, CalculatorClient httpClient)
         {
             _logger = logger;
+            _client = httpClient;
         }
 
         public IActionResult Index()
@@ -23,9 +26,38 @@ namespace Butterfly.Controllers
         [HttpPost]
         public IActionResult Calculate()
         {
-            Save("Number2", EnumOperations.None, out var calculator);
+            Save("Number2", (EnumOperations)TempData["Operation"], true, out var calculator);
             calculator.Number1 = Convert.ToDecimal(TempData["Number1"]);
-            calculator.Result = calculator.Number1 + calculator.Number2; //TODO: call api here
+
+            decimal result = 0;
+            var parameters = new Dictionary<string, string>() {
+                {"number1", calculator.Number1.ToString() },
+                {"number2", calculator.Number2.ToString() }
+            };
+
+            switch (calculator.Operation)
+            {
+                case EnumOperations.Division:
+                    result = _client.Divide<decimal>(parameters).GetAwaiter().GetResult();
+                    break;
+
+                case EnumOperations.Subtraction:
+                    result = _client.Subtract<decimal>(parameters).GetAwaiter().GetResult();
+                    break;
+
+                case EnumOperations.Addition:
+                    result = _client.Add<decimal>(parameters).GetAwaiter().GetResult();
+                    break;
+
+                case EnumOperations.Multiplication:
+                    result = _client.Multiply<decimal>(parameters).GetAwaiter().GetResult();
+                    break;
+
+                default:
+                    break;
+            }
+
+            calculator.Result = result;
             calculator.Display = Convert.ToString(calculator.Result);
 
             TempData["History"] += Convert.ToString(calculator.Result);
@@ -60,25 +92,25 @@ namespace Butterfly.Controllers
 
         public IActionResult Division()
         {
-            Save("Number1", EnumOperations.Division, out var calculator);
+            Save("Number1", EnumOperations.Division, false, out var calculator);
             return View("Index", calculator);
         }
 
         public IActionResult Subtraction()
         {
-            Save("Number1", EnumOperations.Subtraction, out var calculator);
+            Save("Number1", EnumOperations.Subtraction, false, out var calculator);
             return View("Index", calculator);
         }
 
         public IActionResult Addition()
         {
-            Save("Number1", EnumOperations.Addition, out var calculator);
+            Save("Number1", EnumOperations.Addition, false, out var calculator);
             return View("Index", calculator);
         }
 
         public IActionResult Multiplication()
         {
-            Save("Number1", EnumOperations.Multiplication, out var calculator);
+            Save("Number1", EnumOperations.Multiplication, false, out var calculator);
             return View("Index", calculator);
         }
 
@@ -88,31 +120,34 @@ namespace Butterfly.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private void Save(string number, EnumOperations operation, out CalculatorModel calculator)
+        private void Save(string number, EnumOperations operation, bool getResult, out CalculatorModel calculator)
         {
             TempData[number] = TempData["Display"];
             TempData["Display"] = "";
-            switch (operation)
-            {
-                case EnumOperations.Division:
-                    TempData["History"] += " / ";
-                    break;
-                case EnumOperations.Subtraction:
-                    TempData["History"] += " - ";
-                    break;
-                case EnumOperations.Addition:
-                    TempData["History"] += " + ";
-                    break;
-                case EnumOperations.Multiplication:
-                    TempData["History"] += " * ";
-                    break;
-                case EnumOperations.None:
-                    TempData["History"] += " = ";
-                    break;
-                default:
-                    break;
-            }
             TempData["Operation"] = operation;
+
+            if (getResult)
+                TempData["History"] += " = ";
+            else
+            {
+                switch (operation)
+                {
+                    case EnumOperations.Division:
+                        TempData["History"] += " / ";
+                        break;
+                    case EnumOperations.Subtraction:
+                        TempData["History"] += " - ";
+                        break;
+                    case EnumOperations.Addition:
+                        TempData["History"] += " + ";
+                        break;
+                    case EnumOperations.Multiplication:
+                        TempData["History"] += " * ";
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             calculator = NewCalculatorModel(
                 Convert.ToString(TempData["Display"]) ?? "",

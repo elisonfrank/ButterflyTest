@@ -5,7 +5,6 @@
         Division,
         Subtraction,
         Addition,
-        Multiplication,
-        None
+        Multiplication
     }
 }

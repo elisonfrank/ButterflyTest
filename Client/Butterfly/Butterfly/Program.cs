@@ -1,7 +1,10 @@
+using Calculator.Helpers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<CalculatorClient>();
 
 var app = builder.Build();
 
