@@ -16,7 +16,7 @@ namespace ServerCalculator.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(float number1, float number2)
+        public IActionResult Add([FromForm] decimal number1, [FromForm] decimal number2)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace ServerCalculator.Controllers
         }
 
         [HttpPost("subtract")]
-        public IActionResult Subtract(float number1, float number2)
+        public IActionResult Subtract([FromForm] decimal number1, [FromForm] decimal number2)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace ServerCalculator.Controllers
         }
 
         [HttpPost("divide")]
-        public IActionResult Divide(float number1, float number2)
+        public IActionResult Divide([FromForm] decimal number1, [FromForm] decimal number2)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace ServerCalculator.Controllers
         }
 
         [HttpPost("multiply")]
-        public IActionResult Multiply(float number1, float number2)
+        public IActionResult Multiply([FromForm] decimal number1, [FromForm] decimal number2)
         {
             try
             {

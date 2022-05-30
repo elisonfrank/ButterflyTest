@@ -4,12 +4,12 @@ namespace Butterfly.Services.Services
 {
     public class CalculatorService : ICalculatorService
     {
-        public float Add(float number1, float number2)
+        public decimal Add(decimal number1, decimal number2)
         {
             return number1 + number2;
         }
 
-        public float Divide(float number1, float number2)
+        public decimal Divide(decimal number1, decimal number2)
         {
             if (number2 <= 0)
                 throw new Exception("Can't divide by zero");
@@ -17,12 +17,12 @@ namespace Butterfly.Services.Services
             return number1 / number2;
         }
 
-        public float Multiply(float number1, float number2)
+        public decimal Multiply(decimal number1, decimal number2)
         {
             return number1 * number2;
         }
 
-        public float Subtract(float number1, float number2)
+        public decimal Subtract(decimal number1, decimal number2)
         {
             return number1 - number2;
         }
