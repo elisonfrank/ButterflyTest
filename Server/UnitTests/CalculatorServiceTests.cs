@@ -1,4 +1,4 @@
-using Butterfly.Services.Services;
+using Services.Services;
 
 namespace Butterfly.UnitTests
 {
@@ -8,14 +8,14 @@ namespace Butterfly.UnitTests
         [TestCase(1, 2, 3)]
         [TestCase(2, 4, 6)]
         [TestCase(-2, 2, 0)]
-        public void Testing_Add_TwoNumbersAreAdded(float n1, float n2, float result)
+        public void Testing_Add_TwoNumbersAreAdded(decimal n1, decimal n2, decimal result)
         {
             //arrange
             var calculator = new CalculatorService();
-            float expectedValue = result;
+            decimal expectedValue = result;
 
             //process
-            float resultValue = calculator.Add(n1, n2);
+            decimal resultValue = calculator.Add(n1, n2);
 
             //asserts
             Assert.IsTrue(expectedValue == resultValue);
@@ -25,30 +25,30 @@ namespace Butterfly.UnitTests
         [TestCase(1, 2, -1)]
         [TestCase(2, 4, -2)]
         [TestCase(-2, 2, -4)]
-        public void Testing_Subtract_TwoNumbersAreSubtracted(float n1, float n2, float result)
+        public void Testing_Subtract_TwoNumbersAreSubtracted(decimal n1, decimal n2, decimal result)
         {
             //arrange
             var calculator = new CalculatorService();
-            float expectedValue = result;
+            decimal expectedValue = result;
 
             //process
-            float resultValue = calculator.Subtract(n1, n2);
+            decimal resultValue = calculator.Subtract(n1, n2);
 
             //asserts
             Assert.IsTrue(expectedValue == resultValue);
         }
 
         [TestCase(2, 2, 1)]
-        [TestCase(3, 2, 1.5f)]
+        [TestCase(3, 2, 1.5d)]
         [TestCase(4, 2, 2)]
-        public void Testing_Divide_TwoNumbersAreDivided(float n1, float n2, float result)
+        public void Testing_Divide_TwoNumbersAreDivided(decimal n1, decimal n2, decimal result)
         {
             //arrange
             var calculator = new CalculatorService();
-            float expectedValue = result;
+            decimal expectedValue = result;
 
             //process
-            float resultValue = calculator.Divide(n1, n2);
+            decimal resultValue = calculator.Divide(n1, n2);
 
             //asserts
             Assert.IsTrue(expectedValue == resultValue);
@@ -56,11 +56,11 @@ namespace Butterfly.UnitTests
 
         [TestCase(2, -2, 1)]
         [TestCase(3, 0, 1)]
-        public void Testing_Divide_When_Number2IsLessOrEqualZero_Then_ThrowsException(float n1, float n2, float result)
+        public void Testing_Divide_When_Number2IsLessOrEqualZero_Then_ThrowsException(decimal n1, decimal n2, decimal result)
         {
             //arrange
             var calculator = new CalculatorService();
-            float expectedValue = result;
+            decimal expectedValue = result;
 
             //process
             Action division = () => calculator.Divide(n1, n2);
@@ -73,14 +73,14 @@ namespace Butterfly.UnitTests
         [TestCase(1, 2, 2)]
         [TestCase(2, 4, 8)]
         [TestCase(-2, 2, -4)]
-        public void Testing_Multiply_TwoNumbersAreMultiplied(float n1, float n2, float result)
+        public void Testing_Multiply_TwoNumbersAreMultiplied(decimal n1, decimal n2, decimal result)
         {
             //arrange
             var calculator = new CalculatorService();
-            float expectedValue = result;
+            decimal expectedValue = result;
 
             //process
-            float resultValue = calculator.Multiply(n1, n2);
+            decimal resultValue = calculator.Multiply(n1, n2);
 
             //asserts
             Assert.IsTrue(expectedValue == resultValue);
