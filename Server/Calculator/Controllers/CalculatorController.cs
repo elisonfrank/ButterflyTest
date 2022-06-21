@@ -1,8 +1,8 @@
-﻿using Butterfly.Services.Interfaces;
+﻿using Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using ServerCalculator.Models;
+using Calculator.Models;
 
-namespace ServerCalculator.Controllers
+namespace Calculator.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -1,5 +1,5 @@
-using Butterfly.Services.Interfaces;
-using Butterfly.Services.Services;
+using Services.Interfaces;
+using Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

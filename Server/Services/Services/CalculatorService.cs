@@ -1,6 +1,6 @@
-﻿using Butterfly.Services.Interfaces;
+﻿using Services.Interfaces;
 
-namespace Butterfly.Services.Services
+namespace Services.Services
 {
     public class CalculatorService : ICalculatorService
     {

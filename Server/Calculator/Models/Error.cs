@@ -1,4 +1,4 @@
-﻿namespace ServerCalculator.Models
+﻿namespace Calculator.Models
 {
     public class Error
     {

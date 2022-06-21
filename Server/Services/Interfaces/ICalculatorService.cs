@@ -1,4 +1,4 @@
-﻿namespace Butterfly.Services.Interfaces
+﻿namespace Services.Interfaces
 {
     public interface ICalculatorService
     {
