@@ -1,11 +1,10 @@
-﻿using Butterfly.Models;
-using Calculator.Enums;
+﻿using Calculator.Enums;
 using Calculator.Helpers;
 using Calculator.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Butterfly.Controllers
+namespace Calculator.Controllers
 {
     public class HomeController : Controller
     {
